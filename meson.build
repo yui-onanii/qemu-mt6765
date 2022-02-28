@@ -4310,7 +4310,9 @@ subdir('scripts')
 subdir('tools')
 subdir('pc-bios')
 subdir('docs')
-subdir('tests')
+if get_option('tests')
+  subdir('tests')
+endif
 if gtk.found()
   subdir('po')
 endif
