@@ -1,9 +1,14 @@
 #include "qemu/osdep.h"
 #include "qapi/error.h"
+#include "exec/hwaddr.h"
 #include "hw/qdev-core.h"
 #include "hw/arm/mt6765.h"
 #include "qom/object.h"
 #include "target/arm/cpu-qom.h"
+
+const hwaddr mt6765_memmap[] = {
+    [MT6765_DEV_SDRAM]   = 0x40000000,
+};
 
 static void mt6765_init(Object *obj)
 {
@@ -12,6 +17,8 @@ static void mt6765_init(Object *obj)
     // TODO: Add all 8 cores
     object_initialize_child(obj, "cpu", &s->cpu,
                             ARM_CPU_TYPE_NAME("cortex-a53"));
+
+    s->memmap = mt6765_memmap;
 }
 
 static void mt6765_realize(DeviceState *dev, Error **errp)
