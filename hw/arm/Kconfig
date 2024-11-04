@@ -365,6 +365,11 @@ config ALLWINNER_R40
     select USB_EHCI_SYSBUS
     select SD
 
+config REDMI9A
+    bool
+    default y
+    depends on TCG && AARCH64
+
 config RASPI
     bool
     default y

@@ -7,4 +7,5 @@ include ../arm-softmmu/default.mak
 # keep out of the build.
 # CONFIG_XLNX_ZYNQMP_ARM=n
 # CONFIG_XLNX_VERSAL=n
+# CONFIG_REDMI9A=n
 # CONFIG_SBSA_REF=n

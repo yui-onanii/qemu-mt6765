@@ -1,0 +1,1 @@
+CONFIG_REDMI9A=y
