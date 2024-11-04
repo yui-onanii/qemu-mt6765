@@ -5,9 +5,12 @@
 #include "exec/memory.h"
 #include "hw/qdev-core.h"
 #include "hw/boards.h"
+#include "hw/arm/boot.h"
 #include "hw/arm/mt6765.h"
 #include "target/arm/cpu-qom.h"
 #include "qom/object.h"
+
+static struct arm_boot_info redmi9a_binfo;
 
 static void redmi9a_init(MachineState *machine)
 {
@@ -22,6 +25,11 @@ static void redmi9a_init(MachineState *machine)
     memory_region_add_subregion(get_system_memory(),
                                 mt6762g->memmap[MT6765_DEV_SDRAM],
                                 machine->ram);
+
+    redmi9a_binfo.ram_size = machine->ram_size;
+    redmi9a_binfo.loader_start = mt6762g->memmap[MT6765_DEV_SDRAM];
+    // this also loads DTB, and overriding the /memory node appropriately
+    arm_load_kernel(&mt6762g->cpu, machine, &redmi9a_binfo);
 }
 
 static void redmi9a_machine_init(MachineClass *mc)
